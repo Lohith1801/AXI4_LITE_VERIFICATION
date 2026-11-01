@@ -24,7 +24,7 @@ class seq_item extends uvm_sequence_item;
         `uvm_field_enum(data_range_e, data_range, UVM_DEFAULT)
     `uvm_object_utils_end
 
-    function new(string name = "wr_txn_seq_item");
+    function new(string name = "seq_item");
         super.new(name);
     endfunction 
 
