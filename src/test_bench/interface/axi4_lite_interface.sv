@@ -63,7 +63,7 @@ interface axi4_lite_interface(input bit ACLK, input bit ARESETn);
 
     clocking wr_mon_cb @(posedge ACLK);
         
-        default input #1step output #1step;
+        default input #1step;
         input AWADDR;
         input AWVALID;
         input AWREADY;
@@ -81,7 +81,7 @@ interface axi4_lite_interface(input bit ACLK, input bit ARESETn);
 
 
     clocking rd_mon_cb @(posedge ACLK);
-        default input #1step output #1step;
+        default input #1step;
         input ARADDR;
         input ARVALID;
         input ARREADY;
