@@ -1,4 +1,8 @@
 package tb_pkg;
+    //uvm_pkg
+    `include"uvm_macros.sv"
+    import uvm_pkg::*;
+    
     //globals
     `include "./globals/global_pkg.sv"
 
