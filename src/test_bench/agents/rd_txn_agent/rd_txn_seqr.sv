@@ -1,4 +1,4 @@
-class rd_txn_seqr extenfs uvm_sequencer #(wr_txn_seq_item);
+class rd_txn_seqr extenfs uvm_sequencer #(seq_item);
     `uvm_component_utils(rd_txn_seqr)
 
     function new(string name = "rd_txn_seqr", uvm_component parent);
