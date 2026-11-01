@@ -1,8 +1,8 @@
 class rd_txn_monitor extends uvm_monitor;
     `uvm_component_utils(rd_txn_monitor)
 
-    uvm_analysis_port #(rd_txn_seq_item) rd_addr_ch_ap;
-    uvm_analysis_port #(rd_txn_seq_item) rd_data_ch_ap;
+    uvm_analysis_port #(seq_item) rd_addr_ch_ap;
+    uvm_analysis_port #(seq_item) rd_data_ch_ap;
     virtual axi4_lite_interface.RD_MON vif;
     
     function new(string name = "rd_txn_monitor", uvm_component parent);
@@ -22,11 +22,11 @@ class rd_txn_monitor extends uvm_monitor;
         super.run_phase(phase);  
         fork: main
         begin: READ_ADDRESS_CHANNEL
-            rd_txn_seq_item rd_addr_tx;
+            seq_item rd_addr_tx;
             forever begin
                 @(vif.rd_mon_cb);
                 if(vif.rd_mon_cb.ARVALID && vif.rd_mon_cb.ARREADY) begin
-                    rd_addr_tx = rd_txn_seq_item::type_id::create("rd_addr_tx");
+                    rd_addr_tx = seq_item::type_id::create("rd_addr_tx");
                     rd_addr_tx.araddr = vif.rd_mon_cb.ARADDR;
                     rd_addr_ch_ap.write(rd_addr_tx); 
                 end               
@@ -34,11 +34,11 @@ class rd_txn_monitor extends uvm_monitor;
         end
 
         begin: READ_DATA_CHANNEL
-            rd_txn_seq_item rd_data_tx;   
+            seq_item rd_data_tx;   
             forever begin
                 @(vif.rd_mon_cb);
                 if(vif.rd_mon_cb.RVALID && vif.rd_mon_cb.RREADY) begin
-                    rd_data_tx = rd_txn_seq_item::type_id::create("rd_data_tx");
+                    rd_data_tx = seq_item::type_id::create("rd_data_tx");
                     rd_data_tx.rdata = vif.rd_mon_cb.RDATA;
                     rd_data_tx.rresp = vif.rd_mon_cb.RRESP;
                     rd_data_ch_ap.write(rd_data_tx); 
